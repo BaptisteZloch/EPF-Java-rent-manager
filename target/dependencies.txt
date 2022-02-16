@@ -1,0 +1,7 @@
+digraph "epf:rentmanager:jar:1.0-SNAPSHOT" { 
+	"epf:rentmanager:jar:1.0-SNAPSHOT" -> "junit:junit:jar:3.8.1:compile" ; 
+	"epf:rentmanager:jar:1.0-SNAPSHOT" -> "com.h2database:h2:jar:1.4.200:compile" ; 
+ } digraph "epf:rentmanager:jar:1.0-SNAPSHOT" { 
+	"epf:rentmanager:jar:1.0-SNAPSHOT" -> "junit:junit:jar:3.8.1:compile" ; 
+	"epf:rentmanager:jar:1.0-SNAPSHOT" -> "com.h2database:h2:jar:1.4.200:compile" ; 
+ } 
