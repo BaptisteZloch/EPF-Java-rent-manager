@@ -32,7 +32,7 @@ public class ClientDao {
 	private static final String FIND_CLIENT_QUERY = "SELECT nom, prenom, email, naissance FROM Client WHERE id=?;";
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
 	
-	public long create(Client client) throws DaoException {
+	/*public long create(Client client) throws DaoException {
 		
 	}
 	
@@ -46,6 +46,6 @@ public class ClientDao {
 
 	public List<Client> findAll() throws DaoException {
 		 
-	}
+	}*/
 
 }

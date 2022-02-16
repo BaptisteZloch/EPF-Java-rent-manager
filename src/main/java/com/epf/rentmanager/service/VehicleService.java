@@ -27,7 +27,7 @@ public class VehicleService {
 	}
 	
 	
-	public long create(Vehicle vehicle) throws ServiceException {
+	/*public long create(Vehicle vehicle) throws ServiceException {
 		// TODO: créer un véhicule
 		
 	}
@@ -40,6 +40,6 @@ public class VehicleService {
 	public List<Vehicle> findAll() throws ServiceException {
 		// TODO: récupérer tous les clients
 		
-	}
+	}*/
 	
 }

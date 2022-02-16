@@ -29,6 +29,7 @@ public class VehicleDao {
 	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, nb_places FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, nb_places FROM Vehicle;";
 	
+	/*
 	public long create(Vehicle vehicle) throws DaoException {
 		
 	}
@@ -42,7 +43,5 @@ public class VehicleDao {
 
 	public List<Vehicle> findAll() throws DaoException {
 		
-	}
-	
-
+	}*/
 }

@@ -25,7 +25,7 @@ public class ClientService {
 	}
 	
 	
-	public long create(Client client) throws ServiceException {
+	/*public long create(Client client) throws ServiceException {
 		// TODO: créer un client
 		
 	}
@@ -38,6 +38,6 @@ public class ClientService {
 	public List<Client> findAll() throws ServiceException {
 		// TODO: récupérer tous les clients
 		
-	}
+	}*/
 	
 }
