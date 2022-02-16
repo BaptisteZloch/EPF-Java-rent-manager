@@ -71,13 +71,13 @@ public class ClientDao {
 			while (rs.next()) {
 				client = new Client(rs.getInt("id"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getDate("naissance").toLocalDate());
 				System.out.println(client);
-				
+				return Optional.ofNullable(client);
 			}
 
 		  } catch (SQLException e) {
 			//DaoException(e);
 		  }	
-		  return client;
+		  return  null;
 	}
 
 	public List<Client> findAll() throws DaoException {
