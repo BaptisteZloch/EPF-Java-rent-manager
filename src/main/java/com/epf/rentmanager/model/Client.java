@@ -1,13 +1,13 @@
 package com.epf.rentmanager.model;
 import java.time.LocalDate;
 public class Client {
-    private long id;
+    private int id;
     private String nom;
     private String prenom;
     private String email;
     private LocalDate naissance;
 
-    public Client(long id, String nom, String prenom, String email, LocalDate naissance) {
+    public Client(int id, String nom, String prenom, String email, LocalDate naissance) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -15,7 +15,7 @@ public class Client {
         this.naissance = naissance;
     }
 
-    public long getId() {
+    public int getId() {
         return this.id;
     }
 
