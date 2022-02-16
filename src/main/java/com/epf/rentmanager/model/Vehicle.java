@@ -5,5 +5,4 @@ public class Vehicle {
     private String constructeur;
     private String modele;
     private byte nb_place;
-    
 }
