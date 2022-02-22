@@ -13,7 +13,7 @@ public class ClientService {
 	private ClientDao clientDao;
 	public static ClientService instance;
 
-	private ClientService() {
+	public ClientService() {
 		this.clientDao = ClientDao.getInstance();
 	}
 
