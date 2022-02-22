@@ -61,12 +61,12 @@ public class ClientDao {
 	}
 
 	public Optional<Client> findById(long id) throws DaoException {
-		Client client;
 		try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
 			((PreparedStatement) stmt).setLong(1, id);
 			ResultSet rs = ((PreparedStatement) stmt).executeQuery(FIND_CLIENT_QUERY);
 			while (rs.next()) {
-				client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
+				Client client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"),
+						rs.getString("email"),
 						rs.getDate("naissance").toLocalDate());
 				System.out.println(client);
 				return Optional.of(client);
