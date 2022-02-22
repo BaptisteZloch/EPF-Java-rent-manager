@@ -34,33 +34,30 @@ public class ClientDao {
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
 
 	public long create(Client client) throws DaoException {
-
-		long key = 0;
 		try (Statement stmt = ConnectionManager.getConnection().prepareStatement(CREATE_CLIENT_QUERY,
 				Statement.RETURN_GENERATED_KEYS)) {
 			((PreparedStatement) stmt).setString(1, client.getNom());
 			((PreparedStatement) stmt).setString(2, client.getPrenom());
 			((PreparedStatement) stmt).setString(3, client.getEmail());
 			((PreparedStatement) stmt).setDate(4, Date.valueOf(client.getNaissance()));
-			key = ((PreparedStatement) stmt).executeUpdate();
+			long key = ((PreparedStatement) stmt).executeUpdate();
 			return key;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return key;
+		return 0;
 	}
 
 	public long delete(Client client) throws DaoException {
-		long key = 0;
 		try (Statement stmt = ConnectionManager.getConnection().prepareStatement(DELETE_CLIENT_QUERY,
 				Statement.RETURN_GENERATED_KEYS)) {
 			((PreparedStatement) stmt).setInt(1, client.getId());
-			key = ((PreparedStatement) stmt).executeUpdate();
+			long key = ((PreparedStatement) stmt).executeUpdate();
 			return key;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return key;
+		return 0;
 	}
 
 	public Optional<Client> findById(long id) throws DaoException {
@@ -72,31 +69,26 @@ public class ClientDao {
 				client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
 						rs.getDate("naissance").toLocalDate());
 				System.out.println(client);
-				return Optional.ofNullable(client);
+				return Optional.of(client);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return Optional.empty();
 	}
 
 	public List<Client> findAll() throws DaoException {
 		ArrayList<Client> clientResultList = new ArrayList<Client>();
 		try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
 			ResultSet rs = ((PreparedStatement) stmt).executeQuery(FIND_CLIENTS_QUERY);
-			// Stores properties of a ResultSet object, including column count
 			while (rs.next()) {
-					Client client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"),
-							rs.getString("email"), rs.getDate("naissance").toLocalDate());
-					clientResultList.add(client);
-				
+				Client client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"),
+						rs.getString("email"), rs.getDate("naissance").toLocalDate());
+				clientResultList.add(client);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return clientResultList;
 	}
-
 }

@@ -1,6 +1,7 @@
 package com.epf.rentmanager.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
@@ -11,33 +12,42 @@ public class ClientService {
 
 	private ClientDao clientDao;
 	public static ClientService instance;
-	
+
 	private ClientService() {
 		this.clientDao = ClientDao.getInstance();
 	}
-	
+
 	public static ClientService getInstance() {
 		if (instance == null) {
 			instance = new ClientService();
 		}
-		
 		return instance;
 	}
-	
-	
-	/*public long create(Client client) throws ServiceException {
-		// TODO: créer un client
-		
+
+	public long create(Client client) throws ServiceException {
+		try {
+			return this.clientDao.create(client);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
-	public Client findById(long id) throws ServiceException {
-		// TODO: récupérer un client par son id
-		
+	public Optional<Client> findById(long id) throws ServiceException {
+		try {
+			return this.clientDao.findById(id);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return Optional.empty();
 	}
 
 	public List<Client> findAll() throws ServiceException {
-		// TODO: récupérer tous les clients
-		
-	}*/
-	
+		try {
+			return this.clientDao.findAll();
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
