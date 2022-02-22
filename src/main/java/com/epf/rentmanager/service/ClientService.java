@@ -42,12 +42,12 @@ public class ClientService {
 		return Optional.empty();
 	}
 
-	public List<Client> findAll() throws ServiceException {
+	public Optional<ArrayList<Client>> findAll() throws ServiceException {
 		try {
 			return this.clientDao.findAll();
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return Optional.empty();
 	}
 }

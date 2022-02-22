@@ -77,18 +77,19 @@ public class ClientDao {
 		return Optional.empty();
 	}
 
-	public List<Client> findAll() throws DaoException {
-		ArrayList<Client> clientResultList = new ArrayList<Client>();
+	public Optional<ArrayList<Client>> findAll() throws DaoException {
 		try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
 			ResultSet rs = ((PreparedStatement) stmt).executeQuery(FIND_CLIENTS_QUERY);
+			ArrayList<Client> clientResultList = new ArrayList<Client>();
 			while (rs.next()) {
 				Client client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"),
 						rs.getString("email"), rs.getDate("naissance").toLocalDate());
 				clientResultList.add(client);
 			}
+			return Optional.of(clientResultList);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return clientResultList;
+		return Optional.empty();
 	}
 }
