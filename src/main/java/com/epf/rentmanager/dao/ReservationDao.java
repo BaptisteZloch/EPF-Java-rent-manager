@@ -42,9 +42,9 @@ public class ReservationDao {
 			long key = ((PreparedStatement) stmt).executeUpdate();
 			return key;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		return 0;
+	
 	}
 
 	public long delete(Reservation reservation) throws DaoException {
@@ -54,9 +54,8 @@ public class ReservationDao {
 			long key = ((PreparedStatement) stmt).executeUpdate();
 			return key;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		return 0;
 	}
 
 	public Optional<Reservation> findResaByClientId(long clientId) throws DaoException {
@@ -70,7 +69,7 @@ public class ReservationDao {
 				return Optional.of(resa);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
 		return Optional.empty();
 	}
@@ -86,7 +85,7 @@ public class ReservationDao {
 				return Optional.of(resa);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
 		return Optional.empty();
 	}
@@ -102,8 +101,7 @@ public class ReservationDao {
 			}
 			return Optional.of(resaResultList);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		return Optional.empty();
 	}
 }

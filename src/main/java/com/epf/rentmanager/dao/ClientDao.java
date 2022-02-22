@@ -41,9 +41,8 @@ public class ClientDao {
 			long key = ((PreparedStatement) stmt).executeUpdate();
 			return key;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		return 0;
 	}
 
 	public long delete(Client client) throws DaoException {
@@ -53,9 +52,8 @@ public class ClientDao {
 			long key = ((PreparedStatement) stmt).executeUpdate();
 			return key;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		return 0;
 	}
 
 	public Optional<Client> findById(long id) throws DaoException {
@@ -70,7 +68,7 @@ public class ClientDao {
 				return Optional.of(client);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
 		return Optional.empty();
 	}
@@ -86,8 +84,7 @@ public class ClientDao {
 			}
 			return Optional.of(clientResultList);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		return Optional.empty();
 	}
 }

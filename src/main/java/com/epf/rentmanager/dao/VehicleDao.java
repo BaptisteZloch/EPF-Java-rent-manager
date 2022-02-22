@@ -39,9 +39,8 @@ public class VehicleDao {
 			long key = ((PreparedStatement) stmt).executeUpdate();
 			return key;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		return 0;
 	}
 
 	public long delete(Vehicle vehicle) throws DaoException {
@@ -51,9 +50,8 @@ public class VehicleDao {
 			long key = ((PreparedStatement) stmt).executeUpdate();
 			return key;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		return 0;
 	}
 
 	public Optional<Vehicle> findById(long id) throws DaoException {
@@ -67,7 +65,7 @@ public class VehicleDao {
 				return Optional.of(vehicule);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
 		return Optional.empty();
 	}
@@ -83,8 +81,7 @@ public class VehicleDao {
 			}
 			return Optional.of(vehiculeResultList);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		return Optional.empty();
 	}
 }
