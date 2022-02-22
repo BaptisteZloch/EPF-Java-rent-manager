@@ -1,14 +1,11 @@
 package com.epf.rentmanager.dao;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import com.epf.rentmanager.exception.DaoException;
@@ -65,7 +62,7 @@ public class ReservationDao {
 	public Optional<Reservation> findResaByClientId(long clientId) throws DaoException {
 		try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
 			((PreparedStatement) stmt).setLong(1, clientId);
-			ResultSet rs = ((PreparedStatement) stmt).executeQuery(FIND_RESERVATIONS_BY_VEHICLE_QUERY);
+			ResultSet rs = ((PreparedStatement) stmt).executeQuery(FIND_RESERVATIONS_BY_CLIENT_QUERY);
 			while (rs.next()) {
 				Reservation resa = new Reservation(rs.getInt("id"), rs.getInt("client_id"), rs.getInt("vehicule_id"),
 						rs.getDate("debut").toLocalDate(), rs.getDate("fin").toLocalDate());
