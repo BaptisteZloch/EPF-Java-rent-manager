@@ -68,18 +68,20 @@ public class ClientDao {
 			PreparedStatement stmt = conn.prepareStatement(FIND_CLIENT_QUERY);
 			stmt.setLong(1, id);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				Client client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"),
-						rs.getString("email"),
-						rs.getDate("naissance").toLocalDate());
-				System.out.println(client);
-				conn.close();
-				return Optional.of(client);
-			}
+
+			rs.next();
+
+			Client client = new Client((int)id, rs.getString("nom"), rs.getString("prenom"),
+					rs.getString("email"),
+					rs.getDate("naissance").toLocalDate());
+
+			System.out.println(client);
+
+			return Optional.of(client);
+
 		} catch (SQLException e) {
 			throw new DaoException();
 		}
-		return Optional.empty();
 	}
 
 	public ArrayList<Client> findAll() throws DaoException {
@@ -90,10 +92,10 @@ public class ClientDao {
 			ArrayList<Client> clientResultList = new ArrayList<Client>();
 			while (rs.next()) {
 				Client client = new Client(rs.getInt("id"),
-											rs.getString("nom"),
-											rs.getString("prenom"),
-											rs.getString("email"),
-											rs.getDate("naissance").toLocalDate());
+						rs.getString("nom"),
+						rs.getString("prenom"),
+						rs.getString("email"),
+						rs.getDate("naissance").toLocalDate());
 
 				clientResultList.add(client);
 			}
