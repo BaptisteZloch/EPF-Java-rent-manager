@@ -1,5 +1,6 @@
 package com.epf.rentmanager.dao;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,13 +33,16 @@ public class ClientDao {
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
 
 	public long create(Client client) throws DaoException {
-		try (Statement stmt = ConnectionManager.getConnection().prepareStatement(CREATE_CLIENT_QUERY,
-				Statement.RETURN_GENERATED_KEYS)) {
-			((PreparedStatement) stmt).setString(1, client.getNom());
-			((PreparedStatement) stmt).setString(2, client.getPrenom());
-			((PreparedStatement) stmt).setString(3, client.getEmail());
-			((PreparedStatement) stmt).setDate(4, Date.valueOf(client.getNaissance()));
-			long key = ((PreparedStatement) stmt).executeUpdate();
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(CREATE_CLIENT_QUERY,
+					Statement.RETURN_GENERATED_KEYS);
+			(stmt).setString(1, client.getNom());
+			(stmt).setString(2, client.getPrenom());
+			(stmt).setString(3, client.getEmail());
+			(stmt).setDate(4, Date.valueOf(client.getNaissance()));
+			long key = stmt.executeUpdate();
+			conn.close();
 			return key;
 		} catch (SQLException e) {
 			throw new DaoException();
@@ -46,10 +50,12 @@ public class ClientDao {
 	}
 
 	public long delete(Client client) throws DaoException {
-		try (Statement stmt = ConnectionManager.getConnection().prepareStatement(DELETE_CLIENT_QUERY,
-				Statement.RETURN_GENERATED_KEYS)) {
-			((PreparedStatement) stmt).setInt(1, client.getId());
-			long key = ((PreparedStatement) stmt).executeUpdate();
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(DELETE_CLIENT_QUERY, Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, client.getId());
+			long key = stmt.executeUpdate();
+			conn.close();
 			return key;
 		} catch (SQLException e) {
 			throw new DaoException();
@@ -57,9 +63,12 @@ public class ClientDao {
 	}
 
 	public Optional<Client> findById(long id) throws DaoException {
-		try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
-			((PreparedStatement) stmt).setLong(1, id);
-			ResultSet rs = ((PreparedStatement) stmt).executeQuery(FIND_CLIENT_QUERY);
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(FIND_CLIENT_QUERY);
+			stmt.setLong(1, id);
+			ResultSet rs = stmt.executeQuery();
+			conn.close();
 			while (rs.next()) {
 				Client client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"),
 						rs.getString("email"),
@@ -73,16 +82,20 @@ public class ClientDao {
 		return Optional.empty();
 	}
 
-	public Optional<ArrayList<Client>> findAll() throws DaoException {
-		try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
-			ResultSet rs = ((PreparedStatement) stmt).executeQuery(FIND_CLIENTS_QUERY);
+	public ArrayList<Client> findAll() throws DaoException {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(FIND_CLIENTS_QUERY);
+			ResultSet rs = stmt.executeQuery();
+			conn.close();
 			ArrayList<Client> clientResultList = new ArrayList<Client>();
 			while (rs.next()) {
 				Client client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"),
 						rs.getString("email"), rs.getDate("naissance").toLocalDate());
+						System.out.println(client);
 				clientResultList.add(client);
 			}
-			return Optional.of(clientResultList);
+			return clientResultList;
 		} catch (SQLException e) {
 			throw new DaoException();
 		}

@@ -2,7 +2,6 @@ package com.epf.rentmanager.ui.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -27,7 +26,7 @@ public class ClientListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Optional<ArrayList<Client>> clientList = serviceClient.findAll();
+            ArrayList<Client> clientList = serviceClient.findAll();
             request.setAttribute("users", clientList);
         } catch (ServiceException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package com.epf.rentmanager.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,12 +32,16 @@ public class VehicleDao {
 	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, nb_places FROM Vehicle;";
 
 	public long create(Vehicle vehicle) throws DaoException {
-		try (Statement stmt = ConnectionManager.getConnection().prepareStatement(CREATE_VEHICLE_QUERY,
-				Statement.RETURN_GENERATED_KEYS)) {
-			((PreparedStatement) stmt).setString(1, vehicle.getConstructeur());
-			((PreparedStatement) stmt).setString(2, vehicle.getModele());
-			((PreparedStatement) stmt).setInt(3, vehicle.getNb_place());
+		try {
+
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(CREATE_VEHICLE_QUERY,
+					Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, vehicle.getConstructeur());
+			stmt.setString(2, vehicle.getModele());
+			stmt.setInt(3, vehicle.getNb_place());
 			long key = ((PreparedStatement) stmt).executeUpdate();
+			conn.close();
 			return key;
 		} catch (SQLException e) {
 			throw new DaoException();
@@ -44,9 +49,11 @@ public class VehicleDao {
 	}
 
 	public long delete(Vehicle vehicle) throws DaoException {
-		try (Statement stmt = ConnectionManager.getConnection().prepareStatement(DELETE_VEHICLE_QUERY,
-				Statement.RETURN_GENERATED_KEYS)) {
-			((PreparedStatement) stmt).setInt(1, vehicle.getId());
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(DELETE_VEHICLE_QUERY,
+					Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, vehicle.getId());
 			long key = ((PreparedStatement) stmt).executeUpdate();
 			return key;
 		} catch (SQLException e) {
@@ -55,9 +62,12 @@ public class VehicleDao {
 	}
 
 	public Optional<Vehicle> findById(long id) throws DaoException {
-		try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
-			((PreparedStatement) stmt).setLong(1, id);
-			ResultSet rs = ((PreparedStatement) stmt).executeQuery(FIND_VEHICLE_QUERY);
+		try  {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(FIND_VEHICLE_QUERY);
+			stmt.setLong(1, id);
+			ResultSet rs = ((PreparedStatement) stmt).executeQuery();
+			conn.close();
 			while (rs.next()) {
 				Vehicle vehicule = new Vehicle(rs.getInt("id"), rs.getString("constructeur"), rs.getString("modele"),
 						rs.getByte("nb_place"));
@@ -70,16 +80,19 @@ public class VehicleDao {
 		return Optional.empty();
 	}
 
-	public Optional<ArrayList<Vehicle>> findAll() throws DaoException {
-		try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
-			ResultSet rs = ((PreparedStatement) stmt).executeQuery(FIND_VEHICLES_QUERY);
+	public ArrayList<Vehicle> findAll() throws DaoException {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(FIND_VEHICLES_QUERY);
+			ResultSet rs = ((PreparedStatement) stmt).executeQuery();
 			ArrayList<Vehicle> vehiculeResultList = new ArrayList<Vehicle>();
+			conn.close();
 			while (rs.next()) {
 				Vehicle vehicle = new Vehicle(rs.getInt("id"), rs.getString("constructeur"), rs.getString("modele"),
 						rs.getByte("nb_place"));
 				vehiculeResultList.add(vehicle);
 			}
-			return Optional.of(vehiculeResultList);
+			return vehiculeResultList;
 		} catch (SQLException e) {
 			throw new DaoException();
 		}

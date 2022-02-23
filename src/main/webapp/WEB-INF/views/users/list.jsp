@@ -34,7 +34,7 @@
                               <th>Email</th>
                               <th>Action</th>
                             </tr>
-                            <c:foreach var="user" items="${users}">
+                            <c:forEach var="user" items="${users}">
                               <tr>
                                 <td>${user.id}.</td>
                                 <td>${user.prenom}</td>
@@ -52,7 +52,7 @@
                                   </a>
                                 </td>
                               </tr>
-                            </c>
+                            </c:forEach>
                             <!--<tr> <td>2.</td> <td>Jane</td> <td>Doe</td> <td>jane.doe@epf.fr</td> <td> <a class="btn btn-primary" href="${pageContext.request.contextPath}/users/details?id=2"> <i class="fa fa-play"></i> </a> <a class="btn btn-success disabled" href="#"> <i class="fa fa-edit"></i> </a> <a class="btn btn-danger disabled" href="#"> <i class="fa fa-trash"></i> </a> </td> </tr>-->
                           </table>
                         </div>
