@@ -86,12 +86,12 @@ public class VehicleDao {
 			PreparedStatement stmt = conn.prepareStatement(FIND_VEHICLES_QUERY);
 			ResultSet rs = ((PreparedStatement) stmt).executeQuery();
 			ArrayList<Vehicle> vehiculeResultList = new ArrayList<Vehicle>();
-			conn.close();
 			while (rs.next()) {
 				Vehicle vehicle = new Vehicle(rs.getInt("id"), rs.getString("constructeur"), rs.getString("modele"),
 						rs.getByte("nb_place"));
 				vehiculeResultList.add(vehicle);
 			}
+			conn.close();
 			return vehiculeResultList;
 		} catch (SQLException e) {
 			throw new DaoException();

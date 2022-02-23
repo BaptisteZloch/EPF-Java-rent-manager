@@ -37,10 +37,10 @@ public class ClientDao {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(CREATE_CLIENT_QUERY,
 					Statement.RETURN_GENERATED_KEYS);
-			(stmt).setString(1, client.getNom());
-			(stmt).setString(2, client.getPrenom());
-			(stmt).setString(3, client.getEmail());
-			(stmt).setDate(4, Date.valueOf(client.getNaissance()));
+			stmt.setString(1, client.getNom());
+			stmt.setString(2, client.getPrenom());
+			stmt.setString(3, client.getEmail());
+			stmt.setDate(4, Date.valueOf(client.getNaissance()));
 			long key = stmt.executeUpdate();
 			conn.close();
 			return key;
@@ -68,12 +68,12 @@ public class ClientDao {
 			PreparedStatement stmt = conn.prepareStatement(FIND_CLIENT_QUERY);
 			stmt.setLong(1, id);
 			ResultSet rs = stmt.executeQuery();
-			conn.close();
 			while (rs.next()) {
 				Client client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"),
 						rs.getString("email"),
 						rs.getDate("naissance").toLocalDate());
 				System.out.println(client);
+				conn.close();
 				return Optional.of(client);
 			}
 		} catch (SQLException e) {
@@ -87,14 +87,17 @@ public class ClientDao {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(FIND_CLIENTS_QUERY);
 			ResultSet rs = stmt.executeQuery();
-			conn.close();
 			ArrayList<Client> clientResultList = new ArrayList<Client>();
 			while (rs.next()) {
-				Client client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"),
-						rs.getString("email"), rs.getDate("naissance").toLocalDate());
-						System.out.println(client);
+				Client client = new Client(rs.getInt("id"),
+											rs.getString("nom"),
+											rs.getString("prenom"),
+											rs.getString("email"),
+											rs.getDate("naissance").toLocalDate());
+
 				clientResultList.add(client);
 			}
+			conn.close();
 			return clientResultList;
 		} catch (SQLException e) {
 			throw new DaoException();

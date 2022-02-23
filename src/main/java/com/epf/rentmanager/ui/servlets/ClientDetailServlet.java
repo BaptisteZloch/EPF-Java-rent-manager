@@ -1,5 +1,44 @@
 package com.epf.rentmanager.ui.servlets;
 
-public class ClientDetailServlet {
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Optional;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.epf.rentmanager.exception.ServiceException;
+import com.epf.rentmanager.model.Client;
+import com.epf.rentmanager.service.ClientService;
+
+@WebServlet(name = "ClientDetailServlet", urlPatterns = "/users/details")
+public class ClientDetailServlet extends HttpServlet {
+    @Override
+    public void init(ServletConfig config) {
+        System.out.println("My servlet has been initialized");
+    }
     
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            long id = Long.parseLong(request.getParameter("id"));
+            System.out.println(id);
+            Optional<Client> client = ClientService.getInstance().findById(id);
+            System.out.println(client);
+            request.setAttribute("user", client);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+        request.getRequestDispatcher("./WEB-INF/views/users/details.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
 }
