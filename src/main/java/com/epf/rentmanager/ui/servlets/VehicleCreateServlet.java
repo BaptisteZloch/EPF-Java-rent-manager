@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Client;
+import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
+import com.epf.rentmanager.service.VehicleService;
 
 @WebServlet(name = "VehicleCreateServlet", value = "/cars/create")
 public class VehicleCreateServlet extends HttpServlet {
@@ -29,6 +31,12 @@ public class VehicleCreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                Vehicle vehicle = new Vehicle(request.getParameter("manufacturer"),request.getParameter("modele"),(byte)Integer.parseInt(request.getParameter("seats")));
+                try {
+                    VehicleService.getInstance().create(vehicle);
+                } catch (ServiceException e) {
+                    e.printStackTrace();
+                }
         doGet(request, response);
     }
 }

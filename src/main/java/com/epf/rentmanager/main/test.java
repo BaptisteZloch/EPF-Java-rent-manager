@@ -11,17 +11,28 @@ import com.epf.rentmanager.service.VehicleService;
 
 public class test {
     public static void main(String[] args) throws ServiceException {
-        /*ArrayList<Client> clientList = ClientService.getInstance().findAll();
-        System.out.println(clientList);
-
-
-        Optional<Client> client = ClientService.getInstance().findById(1);
-        System.out.println(client);*/
+        /*
+         * ArrayList<Client> clientList = ClientService.getInstance().findAll();
+         * System.out.println(clientList);
+         * 
+         * 
+         * Optional<Client> client = ClientService.getInstance().findById(1);
+         * System.out.println(client);
+         */
 
         ArrayList<Vehicle> vehicleList = VehicleService.getInstance().findAll();
         System.out.println(vehicleList);
 
-        Optional<Vehicle> vehicle = VehicleService.getInstance().findById(1);
+        /*
+         * Optional<Vehicle> vehicle = VehicleService.getInstance().findById(1);
+         * System.out.println(vehicle);
+         */
+
+        Vehicle vehicle = new Vehicle("Dacia", "Duster", (byte) 2);
         System.out.println(vehicle);
+        VehicleService.getInstance().create(vehicle);
+
+        ArrayList<Vehicle> vehicleList2 = VehicleService.getInstance().findAll();
+        System.out.println(vehicleList2);
     }
 }
