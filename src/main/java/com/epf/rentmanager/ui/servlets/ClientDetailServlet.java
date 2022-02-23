@@ -1,7 +1,6 @@
 package com.epf.rentmanager.ui.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.servlet.ServletConfig;
@@ -26,14 +25,12 @@ public class ClientDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             long id = Long.parseLong(request.getParameter("id"));
-            System.out.println(id);
             Optional<Client> client = ClientService.getInstance().findById(id);
-            System.out.println(client);
             request.setAttribute("user", client);
         } catch (ServiceException e) {
             e.printStackTrace();
         }
-        request.getRequestDispatcher("./WEB-INF/views/users/details.jsp").forward(request, response);
+        request.getServletContext().getRequestDispatcher("/WEB-INF/views/users/details.jsp").forward(request, response);
     }
 
     @Override

@@ -20,8 +20,7 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <h3 class="profile-username text-center">John Doe (john.doe@epf.fr)</h3>
-
+                            <h3 class="profile-username text-center">${user.nom} ${user.prenom} (${user.email})</h3>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
                                     <b>Reservation(s)</b> <a class="pull-right">2</a>
