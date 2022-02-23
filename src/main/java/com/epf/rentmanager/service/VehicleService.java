@@ -43,13 +43,13 @@ public class VehicleService {
 		return Optional.empty();
 	}
 
-	public Optional<ArrayList<Vehicle>> findAll() throws ServiceException {
+	public ArrayList<Vehicle> findAll() throws ServiceException {
 		try {
 			return this.vehicleDao.findAll();
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
-		return Optional.empty();
+		return null;
 	}
 	
 }
