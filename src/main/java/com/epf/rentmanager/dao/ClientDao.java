@@ -93,7 +93,6 @@ public class ClientDao {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(FIND_CLIENTS_COUNTS_QUERY);
 			ResultSet rs = stmt.executeQuery();
-
 			rs.next();
 			int count = rs.getInt("count");
 			System.out.println(count);

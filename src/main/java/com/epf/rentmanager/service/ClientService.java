@@ -16,19 +16,21 @@ import com.epf.rentmanager.dao.ClientDao;
 public class ClientService {
 
 	private ClientDao clientDao;
-	//public static ClientService instance;
+	// public static ClientService instance;
 
 	@Autowired
 	public ClientService(ClientDao clientDao) {
 		this.clientDao = clientDao;
 	}
 
-	/*public static ClientService getInstance() {
-		if (instance == null) {
-			instance = new ClientService();
-		}
-		return instance;
-	}*/
+	/*
+	 * public static ClientService getInstance() {
+	 * if (instance == null) {
+	 * instance = new ClientService();
+	 * }
+	 * return instance;
+	 * }
+	 */
 
 	public long delete(Client client) throws ServiceException {
 		try {
@@ -39,6 +41,14 @@ public class ClientService {
 		return 0;
 	}
 
+	public int count() throws ServiceException {
+		try {
+			return this.clientDao.findCountClient();
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 	public long create(Client client) throws ServiceException {
 		try {

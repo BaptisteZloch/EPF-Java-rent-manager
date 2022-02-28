@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.VehicleService;
 
@@ -32,12 +33,18 @@ public class HomeServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        try {
+            request.setAttribute("vehicules", vehicleService.count());
+            request.setAttribute("clients", clientService.count());
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
         request.getRequestDispatcher("./WEB-INF/views/home.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
-
     }
 }
