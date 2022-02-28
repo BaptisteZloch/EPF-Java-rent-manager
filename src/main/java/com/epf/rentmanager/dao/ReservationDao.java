@@ -18,12 +18,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ReservationDao {
 
-	/*private static ReservationDao instance = null;
+	//private static ReservationDao instance = null;
 
 	private ReservationDao() {
 	}
 
-	public static ReservationDao getInstance() {
+	/*public static ReservationDao getInstance() {
 		if (instance == null) {
 			instance = new ReservationDao();
 		}

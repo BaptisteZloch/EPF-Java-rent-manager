@@ -27,10 +27,8 @@ public class ClientListServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        System.out.println("My servlet has been initialized");
     }
     
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             ArrayList<Client> clientList = clientService.findAll();
@@ -41,7 +39,6 @@ public class ClientListServlet extends HttpServlet {
         request.getRequestDispatcher("./WEB-INF/views/users/list.jsp").forward(request, response);
     }
 
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
