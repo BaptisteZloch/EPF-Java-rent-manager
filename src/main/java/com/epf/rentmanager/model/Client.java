@@ -15,6 +15,23 @@ public class Client {
         this.naissance = naissance;
     }
 
+    public Client(int id) {
+        this.id = id;
+    }
+
+    public Client(String nom, String prenom, String email, LocalDate naissance) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.naissance = naissance;
+    }    
+
+    public Client(String nom, String prenom, String email) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+    }    
+
     public int getId() {
         return this.id;
     }

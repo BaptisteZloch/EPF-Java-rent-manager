@@ -33,6 +33,8 @@ public class VehicleDao {
 	private static final String DELETE_VEHICLE_QUERY = "DELETE FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle;";
+	private static final String FIND_VEHICLES_COUNT_QUERY = "SELECT COUNT(id) AS count FROM Vehicule";
+	
 
 	public long create(Vehicle vehicle) throws DaoException {
 		try {
@@ -97,6 +99,19 @@ public class VehicleDao {
 			}
 			conn.close();
 			return vehiculeResultList;
+		} catch (SQLException e) {
+			throw new DaoException();
+		}
+	}
+
+	public int findCountVehicule() throws DaoException {
+		try  {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(FIND_VEHICLES_COUNT_QUERY);
+			ResultSet rs = ((PreparedStatement) stmt).executeQuery();
+			rs.next();
+			int count = rs.getInt("count");
+			return count;
 		} catch (SQLException e) {
 			throw new DaoException();
 		}

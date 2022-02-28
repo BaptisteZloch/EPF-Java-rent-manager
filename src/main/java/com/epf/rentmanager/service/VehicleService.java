@@ -8,9 +8,12 @@ import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Vehicle;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.epf.rentmanager.dao.VehicleDao;
 
+
+@Service
 public class VehicleService {
 
 	private VehicleDao vehicleDao;
