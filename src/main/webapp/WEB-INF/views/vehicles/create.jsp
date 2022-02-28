@@ -29,7 +29,7 @@
                         <!-- est d�crit an l'attribut "method" de la balise forme -->
                         <!-- action indique � quel "cible" sera envoyr la requ�te, ici notre Servlet qui sera bind sur -->
                         <!-- /vehicles/create -->
-                        <form class="form-horizontal" action="${pageContext.request.contextPath}/vehicles/create" method="post">
+                        <form class="form-horizontal" action="${pageContext.request.contextPath}/cars/create" method="post">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="manufacturer" class="col-sm-2 control-label">Marque</label>

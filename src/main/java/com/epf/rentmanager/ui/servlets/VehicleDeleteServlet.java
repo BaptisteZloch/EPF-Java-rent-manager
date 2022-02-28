@@ -1,7 +1,6 @@
 package com.epf.rentmanager.ui.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,12 +32,12 @@ public class VehicleDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            ArrayList<Vehicle> vehicle = vehicleService.findAll();
-            request.setAttribute("vehicules", vehicle);
+            Vehicle vehicle = new Vehicle(Integer.parseInt(request.getParameter("id")));
+            vehicleService.delete(vehicle);
         } catch (ServiceException e) {
             e.printStackTrace();
         }
-        request.getRequestDispatcher("./WEB-INF/views/vehicles/list.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/vehicles/list.jsp").forward(request, response);
     }
 
     @Override
