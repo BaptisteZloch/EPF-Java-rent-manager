@@ -9,9 +9,14 @@ import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.VehicleService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class test {
-    public static void main(String[] args) throws ServiceException {
-        /*
+    @Autowired
+    private VehicleService vehicleService;
+
+    public void gestion() throws ServiceException{
+    /*
          * ArrayList<Client> clientList = ClientService.getInstance().findAll();
          * System.out.println(clientList);
          * 
@@ -20,7 +25,7 @@ public class test {
          * System.out.println(client);
          */
 
-        ArrayList<Vehicle> vehicleList = VehicleService.getInstance().findAll();
+        ArrayList<Vehicle> vehicleList = vehicleService.findAll();
         System.out.println(vehicleList);
 
         /*
@@ -30,9 +35,13 @@ public class test {
 
         Vehicle vehicle = new Vehicle("Dacia", "Duster", (byte) 2);
         System.out.println(vehicle);
-        VehicleService.getInstance().create(vehicle);
+        vehicleService.create(vehicle);
 
-        ArrayList<Vehicle> vehicleList2 = VehicleService.getInstance().findAll();
+        ArrayList<Vehicle> vehicleList2 = vehicleService.findAll();
         System.out.println(vehicleList2);
+    }
+
+    public static void main(String[] args) throws ServiceException {
+        this.gestion();
     }
 }
