@@ -3,7 +3,6 @@ package com.epf.rentmanager.ui.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +14,7 @@ import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 @WebServlet(name = "ClientListServlet", urlPatterns = "/users")
 public class ClientListServlet extends HttpServlet {
@@ -24,7 +24,7 @@ public class ClientListServlet extends HttpServlet {
 
 
     @Override
-    public void init() {
+    public void init() throws ServletException {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
         System.out.println("My servlet has been initialized");

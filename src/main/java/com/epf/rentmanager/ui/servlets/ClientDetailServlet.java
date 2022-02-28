@@ -3,7 +3,6 @@ package com.epf.rentmanager.ui.servlets;
 import java.io.IOException;
 import java.util.Optional;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +23,7 @@ public class ClientDetailServlet extends HttpServlet {
     private ClientService clientService;
 
     @Override
-    public void init() {
+    public void init() throws ServletException {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
         System.out.println("My servlet has been initialized");
