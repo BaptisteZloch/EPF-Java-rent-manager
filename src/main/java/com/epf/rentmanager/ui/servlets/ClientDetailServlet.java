@@ -14,10 +14,19 @@ import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 @WebServlet(name = "ClientDetailServlet", urlPatterns = "/users/details")
 public class ClientDetailServlet extends HttpServlet {
+
+    @Autowired
+    private ClientService clientService;
+
     @Override
-    public void init(ServletConfig config) {
+    public void init() {
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
         System.out.println("My servlet has been initialized");
     }
     
@@ -25,7 +34,7 @@ public class ClientDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             long id = Long.parseLong(request.getParameter("id"));
-            Optional<Client> client = ClientService.getInstance().findById(id);
+            Optional<Client> client = clientService.findById(id);
             request.setAttribute("user", client);
         } catch (ServiceException e) {
             e.printStackTrace();

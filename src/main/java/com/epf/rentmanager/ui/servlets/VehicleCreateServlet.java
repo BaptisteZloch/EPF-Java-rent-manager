@@ -16,11 +16,20 @@ import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.VehicleService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @WebServlet(name = "VehicleCreateServlet", value = "/cars/create")
 public class VehicleCreateServlet extends HttpServlet {
+   
+    @Autowired
+    private VehicleService vehicleService;
+
+
     @Override
-    public void init(ServletConfig config) {
-        System.out.println("VehicleCreateServlet has been initialized");
+    public void init() {
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+        System.out.println("My servlet has been initialized");
     }
     
     @Override
@@ -33,7 +42,7 @@ public class VehicleCreateServlet extends HttpServlet {
             throws ServletException, IOException {
                 Vehicle vehicle = new Vehicle(request.getParameter("manufacturer"),request.getParameter("modele"),(byte)Integer.parseInt(request.getParameter("seats")));
                 try {
-                    VehicleService.getInstance().create(vehicle);
+                    vehicleService.create(vehicle);
                 } catch (ServiceException e) {
                     e.printStackTrace();
                 }
