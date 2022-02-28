@@ -13,9 +13,12 @@ import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.persistence.ConnectionManager;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class ReservationDao {
 
-	private static ReservationDao instance = null;
+	/*private static ReservationDao instance = null;
 
 	private ReservationDao() {
 	}
@@ -25,7 +28,7 @@ public class ReservationDao {
 			instance = new ReservationDao();
 		}
 		return instance;
-	}
+	}*/
 
 	private static final String CREATE_RESERVATION_QUERY = "INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(?, ?, ?, ?);";
 	private static final String DELETE_RESERVATION_QUERY = "DELETE FROM Reservation WHERE id=?;";
