@@ -31,6 +31,7 @@ public class VehicleDao {
 
 	private static final String CREATE_VEHICLE_QUERY = "INSERT INTO Vehicle(constructeur, modele, nb_places, client_id) VALUES(?, ?,?,?);";
 	private static final String DELETE_VEHICLE_QUERY = "DELETE FROM Vehicle WHERE id=?;";
+	private static final String UPDATE_VEHICLE_QUERY = "UPDATE Vehicule SET constructeur = ?, modele = ?, nb_places = ?, client_id = ? WHERE id = ?;";
 	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, modele, nb_places, client_id FROM Vehicle;";
 	private static final String FIND_VEHICLES_COUNT_QUERY = "SELECT COUNT(id) AS count FROM Vehicle";
@@ -45,6 +46,24 @@ public class VehicleDao {
 			stmt.setString(2, vehicle.getModele());
 			stmt.setInt(3, vehicle.getNb_place());
 			stmt.setInt(4, vehicle.getClient_id());
+			long key = ((PreparedStatement) stmt).executeUpdate();
+			conn.close();
+			return key;
+		} catch (SQLException e) {
+			throw new DaoException();
+		}
+	}
+
+	public long update(Vehicle vehicle) throws DaoException {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(UPDATE_VEHICLE_QUERY,
+					Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, vehicle.getConstructeur());
+			stmt.setString(2, vehicle.getModele());
+			stmt.setInt(3, vehicle.getNb_place());
+			stmt.setInt(4, vehicle.getClient_id());
+			stmt.setInt(5, vehicle.getId());
 			long key = ((PreparedStatement) stmt).executeUpdate();
 			conn.close();
 			return key;
@@ -75,7 +94,6 @@ public class VehicleDao {
 			while (rs.next()) {
 				Vehicle vehicule = new Vehicle(rs.getInt("id"), rs.getString("constructeur"), rs.getString("modele"),
 						rs.getByte("nb_places"));
-				System.out.println(vehicule);
 				conn.close();
 				return Optional.of(vehicule);
 			}
@@ -94,7 +112,6 @@ public class VehicleDao {
 			ArrayList<Vehicle> vehiculeResultList = new ArrayList<Vehicle>();
 			while (rs.next()) {
 				Vehicle vehicle = new Vehicle(rs.getInt("id"), rs.getString("constructeur"), rs.getString("modele"),rs.getByte("nb_places"), rs.getInt("client_id")) ;
-				System.out.println(vehicle);
 				vehiculeResultList.add(vehicle);
 			}
 			conn.close();						
