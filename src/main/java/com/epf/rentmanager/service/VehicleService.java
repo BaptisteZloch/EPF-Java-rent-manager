@@ -42,7 +42,6 @@ public class VehicleService {
 
 	public long update(Vehicle vehicle) throws ServiceException {
 		try {
-			System.out.println("DANS LE SERVICE UPDATE");
 			return this.vehicleDao.update(vehicle);
 		} catch (DaoException e) {
 			e.printStackTrace();

@@ -29,7 +29,7 @@
                         <!-- est d�crit an l'attribut "method" de la balise forme -->
                         <!-- action indique � quel "cible" sera envoyr la requ�te, ici notre Servlet qui sera bind sur -->
                         <!-- /vehicles/create -->
-                        <form class="form-horizontal" action="${pageContext.request.contextPath}/cars/create" method="post">
+                        <form class="form-horizontal" action="${pageContext.request.contextPath}/cars/update" method="post">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="manufacturer" class="col-sm-2 control-label">Marque</label>
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-10">
-                                        <input type="hidden" class="form-control" id="owner" name="owner" placeholder="owner" value="${vehicule.id}">
+                                        <input type="hidden" class="form-control" id="id" name="id" placeholder="id" value="${vehicule.id}">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -72,7 +72,7 @@
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-info pull-right">Ajouter</button>
+                                <button type="submit" class="btn btn-info pull-right">Modifier</button>
                             </div>
                             <!-- /.box-footer -->
                         </form>

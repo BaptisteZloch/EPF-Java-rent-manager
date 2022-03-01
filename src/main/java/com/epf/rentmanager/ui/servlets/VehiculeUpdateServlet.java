@@ -46,7 +46,11 @@ public class VehiculeUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                Vehicle vehicle = new Vehicle(Integer.parseInt(request.getParameter("id")), request.getParameter("manufacturer"),request.getParameter("modele"),(byte)Integer.parseInt(request.getParameter("seats")),Integer.parseInt(request.getParameter("owner")));
+                Vehicle vehicle = new Vehicle(Integer.parseInt(request.getParameter("id")),
+                                                request.getParameter("manufacturer"),
+                                                request.getParameter("modele"),
+                                                (byte)Integer.parseInt(request.getParameter("seats")),
+                                                Integer.parseInt(request.getParameter("owner")));
                 try {
                     vehicleService.update(vehicle);
                 } catch (ServiceException e) {

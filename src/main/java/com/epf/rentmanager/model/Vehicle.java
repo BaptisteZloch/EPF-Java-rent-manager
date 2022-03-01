@@ -91,6 +91,7 @@ public class Vehicle {
             ", constructeur='" + getConstructeur() + "'" +
             ", modele='" + getModele() + "'" +
             ", nb_place='" + getNb_place() + "'" +
+            ", client_id='" + getClient_id() + "'" +
             "}";
     }
 }
