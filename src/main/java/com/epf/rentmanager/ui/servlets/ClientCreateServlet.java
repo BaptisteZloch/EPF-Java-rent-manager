@@ -1,6 +1,8 @@
 package com.epf.rentmanager.ui.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,15 +40,16 @@ public class ClientCreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                Client client = new Client(request.getParameter("last_name"),
-                                            request.getParameter("first_name"),
-                                            request.getParameter("email"));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+                System.out.println(request.getParameter("birthdate"));
+                Client client = new Client(request.getParameter("last_name"),request.getParameter("first_name"),request.getParameter("email"),LocalDate.parse(request.getParameter("birthdate"), formatter));
                 System.out.println(client);
                 try {
                     clientService.create(client);
                 } catch (ServerErrorException | ServiceException e) {
                     e.printStackTrace();
                 }
-        doGet(request, response);
+        //doGet(request, response);
+        response.sendRedirect("/rentmanager/users");  
     }
 }
