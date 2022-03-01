@@ -29,7 +29,7 @@ public class VehicleDao {
 		return instance;
 	}*/
 
-	private static final String CREATE_VEHICLE_QUERY = "INSERT INTO Vehicle(constructeur, modele, nb_places) VALUES(?, ?);";
+	private static final String CREATE_VEHICLE_QUERY = "INSERT INTO Vehicle(constructeur, modele, nb_places) VALUES(?, ?,?);";
 	private static final String DELETE_VEHICLE_QUERY = "DELETE FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle;";
@@ -38,7 +38,6 @@ public class VehicleDao {
 
 	public long create(Vehicle vehicle) throws DaoException {
 		try {
-
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(CREATE_VEHICLE_QUERY,
 					Statement.RETURN_GENERATED_KEYS);
