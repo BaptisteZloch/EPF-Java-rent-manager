@@ -72,17 +72,12 @@ public class ClientDao {
 			PreparedStatement stmt = conn.prepareStatement(FIND_CLIENT_QUERY);
 			stmt.setLong(1, id);
 			ResultSet rs = stmt.executeQuery();
-
 			rs.next();
 
 			Client client = new Client((int)id, rs.getString("nom"), rs.getString("prenom"),
 					rs.getString("email"),
 					rs.getDate("naissance").toLocalDate());
-
-			System.out.println(client);
-
 			return Optional.of(client);
-
 		} catch (SQLException e) {
 			throw new DaoException();
 		}
@@ -95,7 +90,6 @@ public class ClientDao {
 			ResultSet rs = stmt.executeQuery();
 			rs.next();
 			int count = rs.getInt("count");
-			System.out.println(count);
 			return count;
 
 		} catch (SQLException e) {

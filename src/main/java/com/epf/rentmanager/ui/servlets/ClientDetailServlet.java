@@ -34,7 +34,8 @@ public class ClientDetailServlet extends HttpServlet {
         try {
             long id = Long.parseLong(request.getParameter("id"));
             Optional<Client> client = clientService.findById(id);
-            request.setAttribute("user", client);
+            System.out.println("LE CLIENT : "+client.get());
+            request.setAttribute("user", client.get());
         } catch (ServiceException e) {
             e.printStackTrace();
         }
