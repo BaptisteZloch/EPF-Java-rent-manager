@@ -25,6 +25,14 @@ public class Vehicle {
         this.client_id = client_id;
     }
 
+    public Vehicle(int id, String constructeur, String modele, byte nb_place,int client_id) {
+        this.id = id;
+        this.constructeur = constructeur;
+        this.modele = modele;
+        this.nb_place = nb_place;
+        this.client_id = client_id;
+    }
+
     public int getId() {
         return this.id;
     }

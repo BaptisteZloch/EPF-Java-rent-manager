@@ -32,7 +32,7 @@ public class VehicleDao {
 	private static final String CREATE_VEHICLE_QUERY = "INSERT INTO Vehicle(constructeur, modele, nb_places, client_id) VALUES(?, ?,?,?);";
 	private static final String DELETE_VEHICLE_QUERY = "DELETE FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle WHERE id=?;";
-	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle;";
+	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, modele, nb_places, client_id FROM Vehicle;";
 	private static final String FIND_VEHICLES_COUNT_QUERY = "SELECT COUNT(id) AS count FROM Vehicle";
 	
 
@@ -93,11 +93,11 @@ public class VehicleDao {
 			ResultSet rs = ((PreparedStatement) stmt).executeQuery();
 			ArrayList<Vehicle> vehiculeResultList = new ArrayList<Vehicle>();
 			while (rs.next()) {
-				Vehicle vehicle = new Vehicle(rs.getInt("id"), rs.getString("constructeur"), rs.getString("modele"),
-						rs.getByte("nb_places"));
+				Vehicle vehicle = new Vehicle(rs.getInt("id"), rs.getString("constructeur"), rs.getString("modele"),rs.getByte("nb_places"), rs.getInt("client_id")) ;
+				System.out.println(vehicle);
 				vehiculeResultList.add(vehicle);
 			}
-			conn.close();
+			conn.close();						
 			return vehiculeResultList;
 		} catch (SQLException e) {
 			throw new DaoException();
