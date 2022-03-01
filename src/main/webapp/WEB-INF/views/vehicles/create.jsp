@@ -55,18 +55,16 @@
                                         <input type="number" class="form-control" id="seats" name="seats" placeholder="Nombre de places" required>
                                     </div>
                                 </div>
-                                <!--
                                 <div class="form-group">
                                     <label for="owner" class="col-sm-2 control-label">Propriétaire</label>
-
                                     <div class="col-sm-10">
                                         <select class="form-control" id="owner" name="owner">
-                                            <option value="1">John Doe</option>
-                                            <option value="2">Jane Doe</option>
+                                            <c:forEach items="${users}" var="user">
+                                                <option value="${user.id}">${user.prenom} ${user.nom}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
-                                -->
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
