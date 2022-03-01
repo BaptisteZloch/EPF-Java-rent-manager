@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label for="seats" class="col-sm-2 control-label">Nombre de places</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" id="seats" name="seats" placeholder="Nombre de places" value="${vehicule.nb_place}">
+                                        <input type="number" class="form-control" id="seats" min="0" max="8" name="seats" placeholder="Nombre de places" value="${vehicule.nb_place}">
                                     </div>
                                 </div>
                                 <div class="form-group">
