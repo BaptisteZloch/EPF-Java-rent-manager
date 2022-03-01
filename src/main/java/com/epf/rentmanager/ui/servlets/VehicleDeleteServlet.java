@@ -37,7 +37,8 @@ public class VehicleDeleteServlet extends HttpServlet {
         } catch (ServiceException e) {
             e.printStackTrace();
         }
-        request.getRequestDispatcher("/WEB-INF/views/vehicles/list.jsp").forward(request, response);
+        //request.getRequestDispatcher("/WEB-INF/views/vehicles/list.jsp").forward(request, response);
+        response.sendRedirect("/rentmanager/cars"); 
     }
 
     @Override

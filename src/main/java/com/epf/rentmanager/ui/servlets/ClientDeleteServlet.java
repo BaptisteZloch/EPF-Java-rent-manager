@@ -35,7 +35,8 @@ public class ClientDeleteServlet extends HttpServlet {
         } catch (ServiceException e) {
             e.printStackTrace();
         }
-        request.getServletContext().getRequestDispatcher("/WEB-INF/views/users/list.jsp").forward(request, response);
+        //request.getServletContext().getRequestDispatcher("/WEB-INF/views/users/list.jsp").forward(request, response);
+        response.sendRedirect("/rentmanager/users"); 
     }
 
 

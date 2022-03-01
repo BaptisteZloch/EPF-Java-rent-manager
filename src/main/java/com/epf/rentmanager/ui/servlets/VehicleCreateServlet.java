@@ -44,6 +44,7 @@ public class VehicleCreateServlet extends HttpServlet {
                 } catch (ServiceException e) {
                     e.printStackTrace();
                 }
-        doGet(request, response);
+        //doGet(request, response);
+        response.sendRedirect("/rentmanager/cars");  
     }
 }
