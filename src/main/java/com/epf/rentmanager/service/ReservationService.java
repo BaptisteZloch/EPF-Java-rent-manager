@@ -22,15 +22,6 @@ public class ReservationService {
 		this.reservationDao = reservationDao;
 	}
 
-	/*
-	 * public static ClientService getInstance() {
-	 * if (instance == null) {
-	 * instance = new ClientService();
-	 * }
-	 * return instance;
-	 * }
-	 */
-
 	public long delete(Reservation reservation) throws ServiceException {
 		try {
 			return this.reservationDao.delete(reservation);
@@ -40,15 +31,6 @@ public class ReservationService {
 		return 0;
 	}
 
-	/*public int count() throws ServiceException {
-		try {
-			return this.reservationDao.findCountClient();
-		} catch (DaoException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}*/
-
 	public long create(Reservation reservation) throws ServiceException {
 		try {
 			return this.reservationDao.create(reservation);
@@ -57,14 +39,7 @@ public class ReservationService {
 		}
 		return 0;
 	}
-	/*public long update(Reservation reservation) throws ServiceException {
-		try {
-			return this.reservationDao.update(reservation);
-		} catch (DaoException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}*/
+
 	public ArrayList<Reservation> findResaByVehicleId(long id) throws ServiceException {
 		try {
 			return this.reservationDao.findResaByVehicleId(id);
@@ -99,5 +74,5 @@ public class ReservationService {
 			e.printStackTrace();
 		}
 		return 0;
-	}
+	}	
 }
