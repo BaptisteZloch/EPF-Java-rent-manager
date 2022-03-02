@@ -1,7 +1,6 @@
 package com.epf.rentmanager.service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
@@ -66,13 +65,13 @@ public class ReservationService {
 		}
 		return 0;
 	}*/
-	public Optional<Reservation> findResaByVehicleId(long id) throws ServiceException {
+	public ArrayList<Reservation> findResaByVehicleId(long id) throws ServiceException {
 		try {
 			return this.reservationDao.findResaByVehicleId(id);
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
-		return Optional.empty();
+		return null;
 	}
 
     public ArrayList<Reservation> findResaByClientId(long id) throws ServiceException {
@@ -91,5 +90,14 @@ public class ReservationService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public int count() throws ServiceException {
+		try {
+			return this.reservationDao.findCountReservation();
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

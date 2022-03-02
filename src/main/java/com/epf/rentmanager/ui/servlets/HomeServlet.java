@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.service.ClientService;
+import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class HomeServlet extends HttpServlet {
     private VehicleService vehicleService;
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private ReservationService reservationService;
 
 
     @Override
@@ -37,6 +40,7 @@ public class HomeServlet extends HttpServlet {
         try {
             request.setAttribute("vehicules", vehicleService.count());
             request.setAttribute("clients", clientService.count());
+            request.setAttribute("resas", reservationService.count());
         } catch (ServiceException e) {
             e.printStackTrace();
         }

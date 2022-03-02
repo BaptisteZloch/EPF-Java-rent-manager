@@ -36,7 +36,7 @@
                                 </tr>
                                 <c:forEach items="${resas}" var="resa">
                                 <tr>
-                                    <td>${resa.id}</td>
+                                    <td>${resa.id}.</td>
                                     <td>${resa.vehicle_id}</td>
                                     <td>${resa.client_id}</td>
                                     <td>${resa.debut}</td>

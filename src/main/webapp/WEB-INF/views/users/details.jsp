@@ -26,7 +26,7 @@
                                     <b>Reservation(s)</b> <a class="pull-right">${fn:length(reservations)}</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Voiture(s)</b> <a class="pull-right">3</a>
+                                    <b>Voiture(s)</b> <a class="pull-right">${fn:length(vehicules)}</a>
                                 </li>
                             </ul>
                         </div>
@@ -51,10 +51,9 @@
                                             <th>Date de debut</th>
                                             <th>Date de fin</th>
                                         </tr>
-
                                         <c:forEach items="${reservations}" var="resa">
                                             <tr>
-                                                <td>${resa.id}</td>
+                                                <td>${resa.id}.</td>
                                                 <td>${resa.vehicle_id}</td>
                                                 <td>
                                                     <fmt:parseDate value="${resa.debut}" pattern="yyyy-MM-dd" var="parsedDateTime" type="both" />
@@ -79,24 +78,14 @@
                                             <th>Constructeur</th>
                                             <th style=>Nombre de places</th>
                                         </tr>
+                                        <c:forEach items="${vehicules}" var="vehicule">
                                         <tr>
-                                            <td>1.</td>
+                                            <td>${vehicule.vehicle_id}.</td>
                                             <td>Renault</td>
                                             <td>Clio</td>
                                             <td>5</td>
                                         </tr>
-                                        <tr>
-                                            <td>2.</td>
-                                            <td>Peugeot</td>
-                                            <td>206</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Volkswagen</td>
-                                            <td>Touran</td>
-                                            <td>7</td>
-                                        </tr>
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>
