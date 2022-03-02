@@ -5,14 +5,14 @@ import java.time.LocalDate;
 public class Reservation {
     private int id;
     private int client_id;
-    private int vehicule_id;
+    private int vehicle_id;
     private LocalDate debut;
     private LocalDate fin;
 
-    public Reservation(int id, int client_id, int vehicule_id, LocalDate debut, LocalDate fin) {
+    public Reservation(int id, int client_id, int vehicle_id, LocalDate debut, LocalDate fin) {
         this.id = id;
         this.client_id = client_id;
-        this.vehicule_id = vehicule_id;
+        this.vehicle_id = vehicle_id;
         this.debut = debut;
         this.fin = fin;
     }
@@ -20,9 +20,9 @@ public class Reservation {
     public Reservation(int id) {
         this.id = id;
     }
-    public Reservation(int client_id, int vehicule_id, LocalDate debut, LocalDate fin) {
+    public Reservation(int client_id, int vehicle_id, LocalDate debut, LocalDate fin) {
         this.client_id = client_id;
-        this.vehicule_id = vehicule_id;
+        this.vehicle_id = vehicle_id;
         this.debut = debut;
         this.fin = fin;
     }
@@ -39,12 +39,12 @@ public class Reservation {
         this.client_id = client_id;
     }
 
-    public int getVehicule_id() {
-        return this.vehicule_id;
+    public int getVehicle_id() {
+        return this.vehicle_id;
     }
 
-    public void setVehicule_id(int vehicule_id) {
-        this.vehicule_id = vehicule_id;
+    public void setVehicle_id(int vehicle_id) {
+        this.vehicle_id = vehicle_id;
     }
 
     public LocalDate getDebut() {
@@ -68,8 +68,8 @@ public class Reservation {
         return this;
     }
 
-    public Reservation vehicule_id(int vehicule_id) {
-        setVehicule_id(vehicule_id);
+    public Reservation vehicle_id(int vehicle_id) {
+        setVehicle_id(vehicle_id);
         return this;
     }
 
@@ -88,7 +88,7 @@ public class Reservation {
         return "{" +
                 " id='" + getId() + "'" +
                 ", client_id='" + getClient_id() + "'" +
-                ", vehicule_id='" + getVehicule_id() + "'" +
+                ", vehicle_id='" + getVehicle_id() + "'" +
                 ", debut='" + getDebut() + "'" +
                 ", fin='" + getFin() + "'" +
                 "}";

@@ -43,7 +43,7 @@ public class ReservationDao {
 			PreparedStatement stmt = conn.prepareStatement(CREATE_RESERVATION_QUERY,
 			Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, reservation.getClient_id());
-			stmt.setInt(2, reservation.getVehicule_id());
+			stmt.setInt(2, reservation.getVehicle_id());
 			stmt.setDate(3, Date.valueOf(reservation.getDebut()));
 			stmt.setDate(4, Date.valueOf(reservation.getFin()));
 			long key = ((PreparedStatement) stmt).executeUpdate();
@@ -77,7 +77,7 @@ public class ReservationDao {
 			ResultSet rs = ((PreparedStatement) stmt).executeQuery();
 			conn.close();
 			while (rs.next()) {
-				Reservation resa = new Reservation(rs.getInt("id"), rs.getInt("client_id"), rs.getInt("vehicule_id"),
+				Reservation resa = new Reservation(rs.getInt("id"), rs.getInt("client_id"), rs.getInt("vehicle_id"),
 						rs.getDate("debut").toLocalDate(), rs.getDate("fin").toLocalDate());
 				System.out.println(resa);
 				return Optional.of(resa);
@@ -95,7 +95,7 @@ public class ReservationDao {
 			stmt.setLong(1, vehicleId);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Reservation resa = new Reservation(rs.getInt("id"), rs.getInt("client_id"), rs.getInt("vehicule_id"),
+				Reservation resa = new Reservation(rs.getInt("id"), rs.getInt("client_id"), rs.getInt("vehicle_id"),
 						rs.getDate("debut").toLocalDate(), rs.getDate("fin").toLocalDate());
 				System.out.println(resa);
 				return Optional.of(resa);
@@ -113,7 +113,7 @@ public class ReservationDao {
 			ResultSet rs = stmt.executeQuery();
 			ArrayList<Reservation> resaResultList = new ArrayList<Reservation>();
 			while (rs.next()) {
-				Reservation resa = new Reservation(rs.getInt("id"), rs.getInt("client_id"), rs.getInt("vehicule_id"),
+				Reservation resa = new Reservation(rs.getInt("id"), rs.getInt("client_id"), rs.getInt("vehicle_id"),
 						rs.getDate("debut").toLocalDate(), rs.getDate("fin").toLocalDate());
 				resaResultList.add(resa);
 			}
