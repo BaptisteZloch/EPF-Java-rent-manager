@@ -75,16 +75,14 @@ public class ReservationService {
 		return Optional.empty();
 	}
 
-    public Optional<Reservation> findResaByClientId(long id) throws ServiceException {
+    public ArrayList<Reservation> findResaByClientId(long id) throws ServiceException {
 		try {
 			return this.reservationDao.findResaByClientId(id);
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
-		return Optional.empty();
-	}
-
-    
+        return null;
+	} 
 
 	public ArrayList<Reservation> findAll() throws ServiceException {
 		try {
