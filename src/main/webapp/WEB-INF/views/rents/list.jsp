@@ -34,8 +34,8 @@
                                     <th>Fin</th>
                                     <th>Action</th>
                                 </tr>
-                                <tr>
                                 <c:forEach items="${resas}" var="resa">
+                                <tr>
                                     <td>${resa.id}</td>
                                     <td>${resa.vehicle_id}</td>
                                     <td>${resa.client_id}</td>

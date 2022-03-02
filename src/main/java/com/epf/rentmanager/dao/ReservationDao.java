@@ -71,7 +71,6 @@ public class ReservationDao {
 
 	public ArrayList<Reservation> findResaByClientId(long clientId) throws DaoException {
 		try {
-			System.out.println("ID DU CLIENT : "+clientId);
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(FIND_RESERVATIONS_BY_CLIENT_QUERY);
 			stmt.setLong(1, clientId);
@@ -79,9 +78,11 @@ public class ReservationDao {
 		
 			ArrayList<Reservation> resaList = new ArrayList<Reservation>();
 			while (rs.next()) {
-				Reservation resa = new Reservation(rs.getInt("id"), rs.getInt("client_id"), rs.getInt("vehicle_id"),
-						rs.getDate("debut").toLocalDate(), rs.getDate("fin").toLocalDate());
-						System.out.println(resa);
+				Reservation resa = new Reservation(rs.getInt("id"),
+													(int)(clientId),
+													rs.getInt("vehicle_id"),
+													rs.getDate("debut").toLocalDate(),
+													rs.getDate("fin").toLocalDate());
 						resaList.add(resa);
 			}
 			conn.close();

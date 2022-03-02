@@ -1,5 +1,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <%@include file="/WEB-INF/views/common/head.jsp"%>
@@ -50,18 +51,20 @@
                                             <th>Date de debut</th>
                                             <th>Date de fin</th>
                                         </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Renault Megane</td>
-                                            <td>10/01/2018</td>
-                                            <td>12/01/2018</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7.</td>
-                                            <td>Peugeot 207</td>
-                                            <td>10/01/2018</td>
-                                            <td>12/01/2018</td>
-                                        </tr>
+
+                                        <c:forEach items="${reservations}" var="resa">
+                                            <tr>
+                                                <td>${resa.id}</td>
+                                                <td>${resa.vehicle_id}</td>
+                                                <td>
+                                                    <fmt:parseDate value="${resa.debut}" pattern="yyyy-MM-dd" var="parsedDateTime" type="both" />
+                                                    <fmt:formatDate pattern="dd/MM/yyyy" value="${ parsedDateTime }" />
+                                                </td>
+                                                <td> <fmt:parseDate value="${resa.fin}" pattern="yyyy-MM-dd" var="parsedDateTime" type="both" />
+                                                    <fmt:formatDate pattern="dd/MM/yyyy" value="${ parsedDateTime }" /></td>
+                                                <td>
+                                            </tr>
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>
