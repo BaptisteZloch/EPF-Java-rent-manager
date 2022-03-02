@@ -45,9 +45,9 @@
                                         <a class="btn btn-primary disabled" href="${pageContext.request.contextPath}/rents/detail?id=${resa.id}">
                                             <i class="fa fa-play"></i>
                                         </a>
-                                        <a class="btn btn-success" href="${pageContext.request.contextPath}/rents/update?id=${resa.id}">
+                                        <!--<a class="btn btn-success" href="${pageContext.request.contextPath}/rents/update?id=${resa.id}">
                                             <i class="fa fa-edit"></i>
-                                        </a>
+                                        </a>-->
                                         <a class="btn btn-danger" href="${pageContext.request.contextPath}/rents/delete?id=${resa.id}">
                                             <i class="fa fa-trash"></i>
                                         </a>
