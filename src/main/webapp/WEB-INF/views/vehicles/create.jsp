@@ -52,7 +52,7 @@
                                     <label for="seats" class="col-sm-2 control-label">Nombre de places</label>
 
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" id="seats" min="0" max="8" name="seats" placeholder="Nombre de places" required>
+                                        <input type="number" class="form-control" id="seats" min="2" max="9" name="seats" placeholder="Nombre de places" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
