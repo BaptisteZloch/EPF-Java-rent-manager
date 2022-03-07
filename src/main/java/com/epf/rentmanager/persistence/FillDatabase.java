@@ -55,6 +55,7 @@ public class FillDatabase {
             stmt.execute("INSERT INTO Vehicle(constructeur, modele, nb_places) VALUES('Nissan','Juke', 4)");
 
             stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(1,1,'2022-03-22','2022-03-26')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(1,1,'2022-03-24','2022-03-30')");
             stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(2,2,'2022-03-26','2022-03-28')");
             stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(1,3,'2022-03-24','2022-03-29')");
             stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(2,4,'2022-03-26','2022-03-30')");
