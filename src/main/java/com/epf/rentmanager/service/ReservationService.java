@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Reservation;
-import com.epf.rentmanager.model.Vehicle;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +40,7 @@ public class ReservationService {
 		return 0;
 	}
 
-	public ArrayList<Vehicle> findResaByVehicleId(long id) throws ServiceException {
+	public ArrayList<Reservation> findResaByVehicleId(long id) throws ServiceException {
 		try {
 			return this.reservationDao.findResaByVehicleId(id);
 		} catch (DaoException e) {

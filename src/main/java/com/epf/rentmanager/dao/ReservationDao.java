@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.model.Reservation;
-import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.persistence.ConnectionManager;
 
 import org.springframework.stereotype.Repository;
@@ -35,9 +34,9 @@ public class ReservationDao {
 	private static final String CREATE_RESERVATION_QUERY = "INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(?, ?, ?, ?);";
 	private static final String DELETE_RESERVATION_QUERY = "DELETE FROM Reservation WHERE id=?;";
 	private static final String FIND_RESERVATIONS_BY_CLIENT_QUERY = "SELECT id, vehicle_id, debut, fin FROM Reservation WHERE client_id=?;";
-	private static final String FIND_RESERVATIONS_BY_VEHICLE_QUERY = "SELECT DISTINCT Vehicle.id, Vehicle.constructeur, Vehicle.modele, Vehicle.nb_places FROM Reservation INNER JOIN Vehicle ON Reservation.vehicle_id = Vehicle.id WHERE client_id=?;";
 	private static final String FIND_RESERVATIONS_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation;";
 	private static final String FIND_RESERVATIONS_COUNT_QUERY = "SELECT COUNT(id) AS count FROM Reservation";
+	private static final String FIND_RESERVATIONS_BY_VEHICLE_QUERY ="SELECT id, client_id, vehicle_id, debut, fin FROM Reservation WHERE vehicle_id=?;";
 
 	public long create(Reservation reservation) throws DaoException {
 		try {
@@ -94,24 +93,24 @@ public class ReservationDao {
 		}
 	}
 
-	public ArrayList<Vehicle> findResaByVehicleId(long clientId) throws DaoException {
+	public ArrayList<Reservation> findResaByVehicleId(long clientId) throws DaoException {
 		try {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(FIND_RESERVATIONS_BY_VEHICLE_QUERY);
 			stmt.setLong(1, clientId);
-			System.out.println(stmt.toString());
 			ResultSet rs = stmt.executeQuery();
-			ArrayList<Vehicle> carsList = new ArrayList<Vehicle>();
+
+			ArrayList<Reservation> resaList = new ArrayList<Reservation>();
 			while (rs.next()) {
-				Vehicle car = new Vehicle(rs.getInt("vehicle_id"),
-										rs.getString("constructeur"),
-										rs.getString("modele"),
-										rs.getByte("nb_places"));
-				carsList.add(car);
+				Reservation resa = new Reservation(rs.getInt("id"),
+						(int) (clientId),
+						rs.getInt("vehicle_id"),
+						rs.getDate("debut").toLocalDate(),
+						rs.getDate("fin").toLocalDate());
+				resaList.add(resa);
 			}
-			System.out.println(carsList);
 			conn.close();
-			return carsList;
+			return resaList;
 		} catch (SQLException e) {
 			throw new DaoException();
 		}

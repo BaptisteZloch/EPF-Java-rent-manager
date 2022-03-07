@@ -77,6 +77,15 @@ public class VehicleService {
 		return null;
 	}
 
+	public ArrayList<Vehicle> findVehicleByClientId(long id) throws ServiceException {
+		try {
+			return this.vehicleDao.findVehicleByClientId(id);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public int count() throws ServiceException {
 		try {
 			return this.vehicleDao.findCountVehicule();

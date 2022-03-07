@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Vehicle;
-import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.VehicleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,6 @@ public class VehiculeUpdateServlet extends HttpServlet {
    
     @Autowired
     private VehicleService vehicleService;
-    @Autowired
-    private ClientService clientService;
-
 
     @Override
     public void init() throws ServletException {

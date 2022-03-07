@@ -35,6 +35,7 @@ public class VehicleDao {
 	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle;";
 	private static final String FIND_VEHICLES_COUNT_QUERY = "SELECT COUNT(id) AS count FROM Vehicle";
+	private static final String FIND_RESERVATIONS_VEHICLE_BY_CLIENT_QUERY = "SELECT DISTINCT Vehicle.id, Vehicle.constructeur, Vehicle.modele, Vehicle.nb_places FROM Reservation INNER JOIN Vehicle ON Reservation.vehicle_id = Vehicle.id WHERE client_id=?;";
 	
 
 	public long create(Vehicle vehicle) throws DaoException {
@@ -127,6 +128,30 @@ public class VehicleDao {
 			rs.next();
 			int count = rs.getInt("count");
 			return count;
+		} catch (SQLException e) {
+			throw new DaoException();
+		}
+	}
+
+
+	public ArrayList<Vehicle> findVehicleByClientId(long clientId) throws DaoException {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(FIND_RESERVATIONS_VEHICLE_BY_CLIENT_QUERY);
+			stmt.setLong(1, clientId);
+			System.out.println(stmt.toString());
+			ResultSet rs = stmt.executeQuery();
+			ArrayList<Vehicle> carsList = new ArrayList<Vehicle>();
+			while (rs.next()) {
+				Vehicle car = new Vehicle(rs.getInt("vehicle_id"),
+										rs.getString("constructeur"),
+										rs.getString("modele"),
+										rs.getByte("nb_places"));
+				carsList.add(car);
+			}
+			System.out.println(carsList);
+			conn.close();
+			return carsList;
 		} catch (SQLException e) {
 			throw new DaoException();
 		}

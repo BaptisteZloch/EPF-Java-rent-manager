@@ -40,7 +40,7 @@
                                     <td>${vehicle.modele}</td>
                                     <td>${vehicle.nb_place}</td>
                                     <td>
-                                        <a class="btn btn-primary" href="{pageContext.request.contextPath}/cars/details?id=${vehicle.id}">
+                                        <a class="btn btn-primary" href="/rentmanager/cars/details?id=${vehicle.id}">
                                             <i class="fa fa-play"></i>
                                         </a>
                                         <a class="btn btn-success" href="${pageContext.request.contextPath}/cars/update?id=${vehicle.id}">

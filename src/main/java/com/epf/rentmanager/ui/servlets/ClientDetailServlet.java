@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
+import com.epf.rentmanager.service.VehicleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -23,6 +24,9 @@ public class ClientDetailServlet extends HttpServlet {
 
     @Autowired
     private ReservationService reservationService;
+
+    @Autowired
+    private VehicleService vehicleService;
 
     @Override
     public void init() throws ServletException {
@@ -37,7 +41,7 @@ public class ClientDetailServlet extends HttpServlet {
             long id = Long.parseLong(request.getParameter("id"));
             request.setAttribute("user", clientService.findById(id).get());
             request.setAttribute("reservations", reservationService.findResaByClientId(id));
-            request.setAttribute("vehicules", reservationService.findResaByVehicleId(id));
+            request.setAttribute("vehicules", vehicleService.findVehicleByClientId(id));
         } catch (ServiceException e) {
             e.printStackTrace();
         }
