@@ -54,7 +54,11 @@
                                         <c:forEach items="${reservations}" var="resa">
                                             <tr>
                                                 <td>${resa.id}.</td>
-                                                <td>${resa.vehicle_id}</td>
+                                                <c:forEach items="${cars}" var="car">
+                                                    <c:if test="${resa.vehicle_id eq car.id}">
+                                                        <td>${car.constructeur} ${car.modele}</td>
+                                                    </c:if>
+                                                </c:forEach>
                                                 <td>
                                                     <fmt:parseDate value="${resa.debut}" pattern="yyyy-MM-dd" var="parsedDateTime" type="both" />
                                                     <fmt:formatDate pattern="dd/MM/yyyy" value="${ parsedDateTime }" />
