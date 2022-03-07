@@ -31,7 +31,6 @@
                                     <th>Marque</th>
                                     <th>Modele</th>
                                     <th>Nombre de places</th>
-                                    <th>Propriétaire</th>
                                     <th>Action</th>
                                 </tr>
                                 <tr>
@@ -40,9 +39,8 @@
                                     <td>${vehicle.constructeur}</td>
                                     <td>${vehicle.modele}</td>
                                     <td>${vehicle.nb_place}</td>
-                                    <td>${vehicle.client_id}</td>
                                     <td>
-                                        <a class="btn btn-primary" href="car-detail.html">
+                                        <a class="btn btn-primary" href="{pageContext.request.contextPath}/cars/details?id=${vehicle.id}">
                                             <i class="fa fa-play"></i>
                                         </a>
                                         <a class="btn btn-success" href="${pageContext.request.contextPath}/cars/update?id=${vehicle.id}">

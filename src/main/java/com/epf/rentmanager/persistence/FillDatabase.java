@@ -29,7 +29,7 @@ public class FillDatabase {
 
         List<String> createTablesQueries = new ArrayList<>();
         createTablesQueries.add("CREATE TABLE IF NOT EXISTS Client(id INT primary key auto_increment, client_id INT, nom VARCHAR(100), prenom VARCHAR(100), email VARCHAR(100), naissance DATETIME)");
-        createTablesQueries.add("CREATE TABLE IF NOT EXISTS Vehicle(id INT primary key auto_increment, constructeur VARCHAR(100), modele VARCHAR(100), nb_places TINYINT(255), client_id INT,foreign key(client_id) REFERENCES Client(id) ON DELETE CASCADE)");
+        createTablesQueries.add("CREATE TABLE IF NOT EXISTS Vehicle(id INT primary key auto_increment, constructeur VARCHAR(100), modele VARCHAR(100), nb_places TINYINT(255))");
         createTablesQueries.add("CREATE TABLE IF NOT EXISTS Reservation(id INT primary key auto_increment, client_id INT, foreign key(client_id) REFERENCES Client(id) ON DELETE CASCADE, vehicle_id INT, foreign key(vehicle_id) REFERENCES Vehicle(id) ON DELETE CASCADE, debut DATETIME, fin DATETIME)");
 
         try {
@@ -49,10 +49,10 @@ public class FillDatabase {
             stmt.execute("INSERT INTO Client(nom, prenom, email, naissance) VALUES('Afleck', 'Steeve', 'steeve.afleck@email.com', '1988-01-22')");
             stmt.execute("INSERT INTO Client(nom, prenom, email, naissance) VALUES('Rousseau', 'Jacques', 'jacques.rousseau@email.com', '1988-01-22')");
                     
-            stmt.execute("INSERT INTO Vehicle(constructeur, modele, nb_places, client_id) VALUES('Renault','Senic', 4, 1)");
-            stmt.execute("INSERT INTO Vehicle(constructeur, modele, nb_places, client_id) VALUES('Peugeot','208', 4,2)");
-            stmt.execute("INSERT INTO Vehicle(constructeur, modele, nb_places, client_id) VALUES('Seat', 'Ibiza',4,3)");
-            stmt.execute("INSERT INTO Vehicle(constructeur, modele, nb_places, client_id) VALUES('Nissan','Juke', 4,4)");
+            stmt.execute("INSERT INTO Vehicle(constructeur, modele, nb_places) VALUES('Renault','Senic', 4)");
+            stmt.execute("INSERT INTO Vehicle(constructeur, modele, nb_places) VALUES('Peugeot','208', 4)");
+            stmt.execute("INSERT INTO Vehicle(constructeur, modele, nb_places) VALUES('Seat', 'Ibiza',4)");
+            stmt.execute("INSERT INTO Vehicle(constructeur, modele, nb_places) VALUES('Nissan','Juke', 4)");
 
             connection.commit();
             System.out.println("Success!");

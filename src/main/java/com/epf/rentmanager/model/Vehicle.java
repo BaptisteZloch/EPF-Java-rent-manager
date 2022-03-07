@@ -5,8 +5,17 @@ public class Vehicle {
     private String constructeur;
     private String modele;
     private byte nb_place;
-    private int client_id;
 
+
+    public Vehicle(int id) {
+        this.id = id;
+    }
+    
+    public Vehicle(String constructeur, String modele, byte nb_place) {
+        this.constructeur = constructeur;
+        this.modele = modele;
+        this.nb_place = nb_place;
+    }
 
     public Vehicle(int id, String constructeur, String modele, byte nb_place) {
         this.id = id;
@@ -14,35 +23,9 @@ public class Vehicle {
         this.modele = modele;
         this.nb_place = nb_place;
     }
-    public Vehicle(int id) {
-        this.id = id;
-    }
-    
-    public Vehicle(String constructeur, String modele, byte nb_place,int client_id) {
-        this.constructeur = constructeur;
-        this.modele = modele;
-        this.nb_place = nb_place;
-        this.client_id = client_id;
-    }
-
-    public Vehicle(int id, String constructeur, String modele, byte nb_place,int client_id) {
-        this.id = id;
-        this.constructeur = constructeur;
-        this.modele = modele;
-        this.nb_place = nb_place;
-        this.client_id = client_id;
-    }
 
     public int getId() {
         return this.id;
-    }
-
-    public int getClient_id() {
-        return this.client_id;
-    }
-
-    public void setClient_id(int client_id) {
-        this.client_id = client_id;
     }
 
     public String getConstructeur() {
@@ -91,7 +74,6 @@ public class Vehicle {
             ", constructeur='" + getConstructeur() + "'" +
             ", modele='" + getModele() + "'" +
             ", nb_place='" + getNb_place() + "'" +
-            ", client_id='" + getClient_id() + "'" +
             "}";
     }
 }

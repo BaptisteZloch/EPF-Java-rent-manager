@@ -81,9 +81,9 @@
                                         <c:forEach items="${vehicules}" var="vehicule">
                                         <tr>
                                             <td>${vehicule.vehicle_id}.</td>
-                                            <td>Renault</td>
-                                            <td>Clio</td>
-                                            <td>5</td>
+                                            <td>${vehicule.modele}</td>
+                                            <td>${vehicule.constructeur}</td>
+                                            <td>${vehicule.nb_place}</td>
                                         </tr>
                                         </c:forEach>
                                     </table>

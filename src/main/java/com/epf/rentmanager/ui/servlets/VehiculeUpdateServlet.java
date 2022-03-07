@@ -35,7 +35,6 @@ public class VehiculeUpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.setAttribute("users", clientService.findAll());
             request.setAttribute("vehicule", vehicleService.findById(Integer.parseInt(request.getParameter("id"))).get());
         } catch (ServiceException e) {
             e.printStackTrace();
@@ -49,8 +48,7 @@ public class VehiculeUpdateServlet extends HttpServlet {
                 Vehicle vehicle = new Vehicle(Integer.parseInt(request.getParameter("id")),
                                                 request.getParameter("manufacturer"),
                                                 request.getParameter("modele"),
-                                                (byte)Integer.parseInt(request.getParameter("seats")),
-                                                Integer.parseInt(request.getParameter("owner")));
+                                                (byte)Integer.parseInt(request.getParameter("seats")));
                 try {
                     vehicleService.update(vehicle);
                 } catch (ServiceException e) {
