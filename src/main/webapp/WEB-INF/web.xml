@@ -2,12 +2,4 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-	<error-page>
-		<exception-code>400</exception-code>
-		<location>/pageToRedirectTo.html</location>
-	</error-page>
-	<error-page>
-		<exception-code>500</exception-code>
-		<location>/pageToRedirectTo.html</location>
-	</error-page>
 </web-app>
