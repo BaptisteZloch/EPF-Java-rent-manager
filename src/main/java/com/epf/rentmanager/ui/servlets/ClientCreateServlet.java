@@ -3,6 +3,7 @@ package com.epf.rentmanager.ui.servlets;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,6 +35,12 @@ public class ClientCreateServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            ArrayList<Client> clientList = clientService.findAll();
+            request.setAttribute("users", clientList);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
         request.getServletContext().getRequestDispatcher("/WEB-INF/views/users/create.jsp").forward(request, response);
     }
 

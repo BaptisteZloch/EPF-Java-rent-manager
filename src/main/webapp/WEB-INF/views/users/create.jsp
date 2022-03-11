@@ -86,8 +86,25 @@
         } else{
             console.log('nok');
             document.getElementById('addbtn').disabled = true;
+            alert('Il faut avoir plus de 18ans...')
         }
     } 
+
+    const clientsMailsList = [
+                            <c:forEach var="user" items="${users}">
+                                '${user.email}',                  
+                            </c:forEach>                   
+                            ];
+    $('#email').on('change',()=>{
+        let result = clientsMailsList.find((element)=> element==$('#email').val());
+        console.log(result)
+        if(result===undefined){
+            document.getElementById('addbtn').disabled = false;
+        } else { //une adresse mail existe
+            document.getElementById('addbtn').disabled = true;
+            alert('Cette adresse mail existe deja ...');
+        }
+    });
 </script>
 </body>
 </html>

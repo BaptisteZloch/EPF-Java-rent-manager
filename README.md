@@ -2,6 +2,7 @@
 
 ## Lancement du projet
 Pour lancer le projet : `mvn tomcat7:run` parfois `sudo mvn tomcat7:run` 
+Pour stopper le projet : `mvn tomcat7:shutdown`
 Ensuite ouvrir le l'adresse `localhost:8000/rentmanager` dans votre navigateur web
 ## Points fonctionnels
 - Opérations type **CRUD** complète sur les clients
@@ -15,8 +16,8 @@ réservations associées (SQL : ONDELETE CASCADE)
 être compris entre 2 et 9 (HTML : attributs)
 - Une voiture ne peux pas être réservé plus de 7 jours de suite par le même
 utilisateur (JS : fonction event listener sur l'input)
+- Un client ayant une adresse mail déjà prise ne peut pas être créé (JS : fonction qui check les adresses mails)
 ## Points non réussis
-- Un client ayant une adresse mail déjà prise ne peut pas être créé
 - Une voiture ne peux pas être réservé 2 fois le même jour
 - Une voiture ne peux pas être réservé 30 jours de suite sans pause
 
